@@ -9,3 +9,4 @@ box.zip
 
 # Fichiers de dépendances générés (utile plus tard avec -MMD)
 *.d
+*.origin

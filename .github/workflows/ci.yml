@@ -1,4 +1,4 @@
-name: CI — Compilation et test
+name: CI — Compilation et tests
 
 on:
   push:
@@ -25,3 +25,9 @@ jobs:
 
       - name: Exécuter le programme
         run: ./symboles 3
+
+      - name: Compiler les tests
+        run: make tests/tests
+
+      - name: Lancer les tests unitaires
+        run: make check
