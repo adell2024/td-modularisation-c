@@ -1,0 +1,11 @@
+# Objets compilés
+*.o
+
+# Exécutable produit
+symboles
+
+# Archives de distribution
+box.zip
+
+# Fichiers de dépendances générés (utile plus tard avec -MMD)
+*.d
