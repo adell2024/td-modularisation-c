@@ -116,4 +116,5 @@ jobs:
     needs: [build-test, static-analysis, sast, secrets, sca, sbom]
     steps:
       - name: Pipeline DevSecOps réussi
-        run: echo "Compilation, tests, qualité, SAST, secrets, SCA et SBOM : OK"
+        run: |
+          echo 'Compilation, tests, qualité, SAST, secrets, SCA et SBOM : OK'
