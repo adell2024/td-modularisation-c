@@ -37,8 +37,16 @@ jobs:
       - name: Tests unitaires
         run: make check
 
+      # L'exécutable est conservé comme artifact du workflow.
+      - name: Publier l'exécutable
+        uses: actions/upload-artifact@v4
+        with:
+          name: symboles
+          path: symboles
+          if-no-files-found: error
+
   # NON BLOQUANTS : ces analyses peuvent échouer sans faire échouer
-  # le workflow global. Elles restent néanmoins visibles en rouge dans Actions.
+  # le workflow global. Elles restent néanmoins visibles dans Actions.
   static-analysis:
     name: Analyse statique — Cppcheck
     runs-on: ubuntu-latest
@@ -98,7 +106,6 @@ jobs:
         uses: actions/checkout@v4
 
       # trivy-action installe Trivy lui-même : pas besoin de setup-trivy.
-      # On utilise une version d'action existante et on laisse l'analyse non bloquante.
       - name: Scanner le dépôt avec Trivy
         uses: aquasecurity/trivy-action@0.36.0
         with:
@@ -133,4 +140,6 @@ jobs:
       - name: Pipeline principal réussi
         run: |
           echo 'Compilation et tests : OK'
+          echo 'Executable : artifact symboles'
+          echo 'SBOM : artifact sbom-cyclonedx.json'
           echo 'Les analyses qualité et sécurité sont non bloquantes.'
